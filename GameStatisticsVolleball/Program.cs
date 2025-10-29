@@ -1,4 +1,7 @@
 
+using GameStatisticsVolleball.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace GameStatisticsVolleball
 {
     public class Program
@@ -13,7 +16,8 @@ namespace GameStatisticsVolleball
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            builder.Services.AddDbContext<APIDBContext>(options =>
+            options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreConnection")));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
