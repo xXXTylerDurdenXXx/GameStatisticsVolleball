@@ -14,4 +14,4 @@ namespace GameStatisticsVolleball.Models
         public ICollection<Match>? Matches { get; set; }
     }
 }
-}
+
