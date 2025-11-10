@@ -1,5 +1,6 @@
 
 using GameStatisticsVolleball.Models;
+using GameStatisticsVolleball.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameStatisticsVolleball
@@ -18,6 +19,14 @@ namespace GameStatisticsVolleball
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<APIDBContext>(options =>
             options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreConnection")));
+
+            builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
+            builder.Services.AddScoped<IPlayerMatchStatsRepository, PlayerMatchStatsRepository>();
+            builder.Services.AddScoped<IMatchRepository, MatchRepository>();
+            builder.Services.AddScoped<ITeamRepository, TeamRepository>();
+            builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
+            builder.Services.AddScoped<IPositionRepository, PositionRepository>();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
