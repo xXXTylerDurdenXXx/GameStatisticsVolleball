@@ -27,6 +27,7 @@ namespace GameStatisticsVolleball
             builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
             builder.Services.AddScoped<IPositionRepository, PositionRepository>();
 
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
