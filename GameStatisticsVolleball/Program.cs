@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using GameStatisticsVolleball.Mappings;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
+using GameStatisticsVolleball.Models.DTO;
 
 namespace GameStatisticsVolleball
 {
@@ -19,6 +20,7 @@ namespace GameStatisticsVolleball
 
             builder.Services.AddControllers();
             builder.Services.AddAutoMapper(typeof(MappingProfile));
+            builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -26,6 +28,7 @@ namespace GameStatisticsVolleball
             options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreConnection")));
 
             builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
+           
             builder.Services.AddScoped<IPlayerMatchStatsRepository, PlayerMatchStatsRepository>();
             builder.Services.AddScoped<IMatchRepository, MatchRepository>();
             builder.Services.AddScoped<ITeamRepository, TeamRepository>();

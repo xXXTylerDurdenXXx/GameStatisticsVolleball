@@ -21,6 +21,10 @@ namespace GameStatisticsVolleball.Models
         [Range(0, 150)]
         public int Width { get; set; }
 
+        [Required]
+        public int PositionId { get; set; }
+        [Required]
+        public int TeamId { get; set; }
         // Навигационные св-ва
         public Position Position { get; set; } = null!;
         public Team Team { get; set; } = null!;
