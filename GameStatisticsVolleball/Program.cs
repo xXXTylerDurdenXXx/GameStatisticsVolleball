@@ -2,6 +2,9 @@
 using GameStatisticsVolleball.Models;
 using GameStatisticsVolleball.Repositories;
 using Microsoft.EntityFrameworkCore;
+using GameStatisticsVolleball.Mappings;
+using AutoMapper;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace GameStatisticsVolleball
 {
@@ -11,9 +14,11 @@ namespace GameStatisticsVolleball
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -27,6 +32,8 @@ namespace GameStatisticsVolleball
             builder.Services.AddScoped<ITournamentRepository, TournamentRepository>();
             builder.Services.AddScoped<IPositionRepository, PositionRepository>();
 
+
+           
 
             var app = builder.Build();
 
