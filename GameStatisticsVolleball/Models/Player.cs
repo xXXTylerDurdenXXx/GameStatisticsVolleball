@@ -8,6 +8,7 @@ namespace GameStatisticsVolleball.Models
         public int Id { get; set; }
         [Required]
         [MaxLength(50)]
+        [MinLength(1)]
         public string FullName { get; set; } = null!;
         [Required]
         public DateTime DateOfBirth { get; set; }

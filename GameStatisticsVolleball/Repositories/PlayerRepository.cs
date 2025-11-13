@@ -15,6 +15,9 @@ namespace GameStatisticsVolleball.Repositories
         {
             _context.Player.Add(entity);
             _context.SaveChanges();
+
+            _context.Entry(entity).Reference(p =>p.Team).Load();
+            _context.Entry(entity).Reference(p => p.Position).Load();
             return entity;
         }
 
