@@ -14,6 +14,6 @@ namespace GameStatisticsVolleball.Models.DTO
         public string CoachName { get; set; } = null!;
         [Required]
         public string City { get; set; } = null!;
-        public string? Country { get; set; }
+        
     }
 }

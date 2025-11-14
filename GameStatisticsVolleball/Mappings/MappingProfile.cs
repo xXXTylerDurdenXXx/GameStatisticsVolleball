@@ -19,6 +19,8 @@
             CreateMap<CreateTeamDTO, Team>();
             CreateMap<UpdateTeamDTO, Team>();
             CreateMap<Team, TeamDTO>();
+               
+
 
             CreateMap<CreateTournamentDTO, Tournament>();
 
