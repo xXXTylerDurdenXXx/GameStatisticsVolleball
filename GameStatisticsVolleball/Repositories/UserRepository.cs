@@ -1,4 +1,5 @@
 ﻿using GameStatisticsVolleball.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameStatisticsVolleball.Repositories
 {
@@ -19,27 +20,52 @@ namespace GameStatisticsVolleball.Repositories
 
         public bool DeleteUser(int id)
         {
-            throw new NotImplementedException();
+            var user = _context.Users.FirstOrDefault(u =>
+            u.Id == id);
+            if (user != null)
+            {
+                _context.Users.Remove(user);
+                _context.SaveChanges();
+                return true;
+            }
+            else return false;
         }
 
         public User ExistUser(string loginOrEmail)
         {
-            throw new NotImplementedException();
+            var user = _context.Users.
+                 Include(u => u.Role)
+                 .FirstOrDefault(u =>
+             u.Login == loginOrEmail ||
+             u.Email == loginOrEmail);
+
+            return user;
         }
 
         public User GetUserById(int id)
         {
-            throw new NotImplementedException();
+            var user = _context.Users.FirstOrDefault(u =>
+           u.Id == id);
+            if (user != null)
+                return user;
+            else return null;
         }
 
         public Role? RoleExists(int id)
         {
-            throw new NotImplementedException();
+            return _context.Roles.FirstOrDefault(u => u.Id == id);
         }
 
         public User UpdateUser(int id, User user)
         {
-            throw new NotImplementedException();
+            var userr = _context.Users.FirstOrDefault(u =>
+             u.Id == id);
+            if (userr != null)
+            {
+                _context.Users.Update(user);
+                _context.SaveChanges();
+            }
+            return user;
         }
     }
 }
