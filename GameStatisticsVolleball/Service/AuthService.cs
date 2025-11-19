@@ -3,6 +3,7 @@ using GameStatisticsVolleball.Models.DTO;
 
 namespace GameStatisticsVolleball.Service
 {
+
     public class AuthService : IAuthService
     {
         public AuthResponse Login(LoginRequest loginRequest)
