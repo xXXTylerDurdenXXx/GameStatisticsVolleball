@@ -10,6 +10,8 @@ namespace GameStatisticsVolleball.Models
         public DbSet<PlayerMatchStats> PlayerMatchStats { get; set; }
         public DbSet<Position> Position { get; set; }
         public DbSet<Tournament> Tournament { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
         public APIDBContext(DbContextOptions<APIDBContext> options)
             :base(options) { }
         
