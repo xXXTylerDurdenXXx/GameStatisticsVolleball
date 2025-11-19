@@ -6,6 +6,7 @@ using GameStatisticsVolleball.Mappings;
 using AutoMapper;
 using Microsoft.Extensions.DependencyInjection;
 using GameStatisticsVolleball.Models.DTO;
+using System.Text;
 
 namespace GameStatisticsVolleball
 {
@@ -15,12 +16,19 @@ namespace GameStatisticsVolleball
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            
+            builder.Services.Configure<JwtConfiguration>(
+               builder.Configuration.GetSection("Jwt"));
+
+            var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtConfiguration>();
+            var secretKey = Encoding.ASCII.GetBytes(jwtSettings.SecretKey);
             // Add services to the container.
+
 
             builder.Services.AddControllers();
             builder.Services.AddAutoMapper(typeof(MappingProfile));
             builder.Services.AddControllers();
+
+            
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
