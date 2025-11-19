@@ -9,6 +9,7 @@ using GameStatisticsVolleball.Models.DTO;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using GameStatisticsVolleball.Service;
 
 namespace GameStatisticsVolleball
 {
@@ -19,9 +20,9 @@ namespace GameStatisticsVolleball
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.Configure<JwtConfiguration>(
-               builder.Configuration.GetSection("Jwt"));
+               builder.Configuration.GetSection("JwtSettings"));
 
-            var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtConfiguration>();
+            var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtConfiguration>();
             var secretKey = Encoding.ASCII.GetBytes(jwtSettings.SecretKey);
 
             builder.Services.AddAuthentication(opt =>
@@ -60,8 +61,9 @@ namespace GameStatisticsVolleball
             builder.Services.AddDbContext<APIDBContext>(options =>
             options.UseNpgsql(builder.Configuration.GetConnectionString("PostgreConnection")));
 
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
             builder.Services.AddScoped<IPlayerRepository, PlayerRepository>();
-           
+            builder.Services.AddScoped<IAuthService, AuthService>();
             builder.Services.AddScoped<IPlayerMatchStatsRepository, PlayerMatchStatsRepository>();
             builder.Services.AddScoped<IMatchRepository, MatchRepository>();
             builder.Services.AddScoped<ITeamRepository, TeamRepository>();

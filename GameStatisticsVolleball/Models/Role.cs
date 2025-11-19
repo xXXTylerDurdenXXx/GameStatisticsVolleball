@@ -11,6 +11,8 @@ namespace GameStatisticsVolleball.Models
         public string Name { get; set; } = null!;
         [StringLength(200)]
 
+        public string? Description { get; set; }
+
         public List<User> Users { get; set; } = new List<User>();
     }
 }

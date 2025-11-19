@@ -91,6 +91,7 @@ namespace GameStatisticsVolleball.Service
 
                 if (user1 != null || user2 != null)
                 {
+                    
                     return new AuthResponse
                     {
                         Success = false,

@@ -18,8 +18,8 @@ namespace GameStatisticsVolleball.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    NamePosition = table.Column<string>(type: "text", nullable: false),
-                    Description = table.Column<string>(type: "character varying(200)", maxLength: 200, nullable: true)
+                    NamePosition = table.Column<string>(type: "text", nullable: false)
+                    
                 },
                 constraints: table =>
                 {
