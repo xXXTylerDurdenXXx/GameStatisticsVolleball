@@ -4,9 +4,11 @@ using GameStatisticsVolleball.Models;
 using GameStatisticsVolleball.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GameStatisticsVolleball.Controllers
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class PlayerController : ControllerBase
@@ -19,6 +21,7 @@ namespace GameStatisticsVolleball.Controllers
             _mapper = mapper;
         }
 
+        [Authorize(Roles ="User")]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -27,6 +30,7 @@ namespace GameStatisticsVolleball.Controllers
             return Ok(playerDtos);
         }
 
+        [Authorize(Roles = "User")]
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
@@ -37,7 +41,7 @@ namespace GameStatisticsVolleball.Controllers
             var playerDto = _mapper.Map<PlayerDTO>(player);
             return Ok(playerDto);
         }
-
+        [Authorize(Roles ="Admin")]
         [HttpPost]
         public IActionResult Create([FromBody] CreatePlayerDTO dto)
         {
@@ -50,7 +54,7 @@ namespace GameStatisticsVolleball.Controllers
             var playerDto = _mapper.Map<PlayerDTO>(player);
             return CreatedAtAction(nameof(GetById), new { id = player.Id }, playerDto);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id}")]
         public IActionResult Update(int id, [FromBody] UpdatePlayerDTO dto)
         {
@@ -67,7 +71,7 @@ namespace GameStatisticsVolleball.Controllers
             var playerDto = _mapper.Map<PlayerDTO>(existingPlayer);
             return Ok(playerDto);
         }
-
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -77,7 +81,7 @@ namespace GameStatisticsVolleball.Controllers
             _playerRepository.Delete(id);
             return NoContent();
         }
-
+        [Authorize(Roles = "User")]
         [HttpGet("position/{positionId}")]
         public IActionResult GetByPosition(int positionId)
         {

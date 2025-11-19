@@ -4,6 +4,7 @@ using GameStatisticsVolleball.Models;
 using GameStatisticsVolleball.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GameStatisticsVolleball.Controllers
 {
@@ -21,7 +22,7 @@ namespace GameStatisticsVolleball.Controllers
             _mapper = mapper;
         }
 
-        
+        [Authorize(Roles = "User")]
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -30,7 +31,7 @@ namespace GameStatisticsVolleball.Controllers
             return Ok(result);
         }
 
-        
+        [Authorize(Roles = "User")]
         [HttpGet("{id:int}")]
         public IActionResult GetById(int id)
         {
@@ -42,7 +43,7 @@ namespace GameStatisticsVolleball.Controllers
             return Ok(result);
         }
 
-        
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult Create([FromBody] CreateTeamDTO dto)
         {
@@ -56,7 +57,7 @@ namespace GameStatisticsVolleball.Controllers
             return CreatedAtAction(nameof(GetById), new { id = team.Id }, result);
         }
 
-        
+        [Authorize(Roles = "Admin")]
         [HttpPut("{id:int}")]
         public IActionResult Update(int id, [FromBody] UpdateTeamDTO dto)
         {
@@ -74,7 +75,7 @@ namespace GameStatisticsVolleball.Controllers
             return Ok(_mapper.Map<TeamDTO>(existingTeam));
         }
 
-        
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id:int}")]
         public IActionResult Delete(int id)
         {

@@ -19,7 +19,7 @@ namespace GameStatisticsVolleball.Controllers
             _userService = userService;
             _logger = logger;
         }
-
+        
         [HttpPost("Login")]
         public ActionResult<AuthResponseDTO> Login([FromBody] LoginRequest dto)
         {
